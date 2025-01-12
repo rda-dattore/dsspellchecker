@@ -2,6 +2,10 @@
 
 This spellchecker validates the words in a text string, and returns a list of words that fail to validate.
 
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
 ## Installation
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install spellchecker.
