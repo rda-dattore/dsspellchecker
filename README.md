@@ -21,6 +21,10 @@ Follow these steps:
 ```python
 from spellchecker import SpellChecker
 
-
 spell_checker = SpellChecker()
+print(spell_checker.initialized)
+# True if the spellchecker is ready, False if error
+
+print(spell_checker.error)
+# '' for no error (initialized == True), otherwise some message
 ```
