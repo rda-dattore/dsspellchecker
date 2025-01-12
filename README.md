@@ -15,4 +15,8 @@ Follow these steps:
 ## Usage
 
 ```python
+from spellchecker import SpellChecker
+
+
+spell_checker = SpellChecker()
 ```
