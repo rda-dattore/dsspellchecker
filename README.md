@@ -29,6 +29,6 @@ print(spell_checker.error)
 # '' for no error (initialized == True), otherwise some message
 
 # check some text
-spell_checker.check("Hello, world! The weather today is beautiful! You won't need "
-    "to dodge any raindrops, but make sure you have your sunglasses!")
+spell_checker.check("This dataset contains data from a reanalysis model. Parameters include "
+    "temperature at 2 meters and winds at 10 meters.")
 ```
