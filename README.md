@@ -38,4 +38,5 @@ print(spell_checker.misspelled_words)
 spell_checker.check("This datset contains data from a reanalysis model. Parmeters include "
     "temperature at 2 meters and winds at 10 meters.")
 print(spell_checker.misspelled_words)
+# prints ['datset', 'Parmeters'] for the two misspelled words
 ```
