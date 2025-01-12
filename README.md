@@ -27,4 +27,7 @@ print(spell_checker.initialized)
 
 print(spell_checker.error)
 # '' for no error (initialized == True), otherwise some message
+
+# check some text
+spell_checker.check("Hello, world! The weather today is beautiful! You won't need to dodge any raindrops, but make sure you have your sunglasses!")
 ```
