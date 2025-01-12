@@ -31,4 +31,11 @@ print(spell_checker.error)
 # check some text
 spell_checker.check("This dataset contains data from a reanalysis model. Parameters include "
     "temperature at 2 meters and winds at 10 meters.")
+print(spell_checker.misspelled_words)
+# prints [] because all words validate
+
+# check some text with two misspellings
+spell_checker.check("This datset contains data from a reanalysis model. Parmeters include "
+    "temperature at 2 meters and winds at 10 meters.")
+print(spell_checker.misspelled_words)
 ```
