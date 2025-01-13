@@ -15,7 +15,6 @@ Follow these steps:
 1. From within your python environment, run `pip install <name_of_wheel_file>`
 1. Build the spellchecker database with the command `build_spellchecker_db`
 
-
 ## Usage
 
 ```python
@@ -40,3 +39,5 @@ spell_checker.check("This datset contains data from a reanalysis model. Parmeter
 print(spell_checker.misspelled_words)
 # prints ['datset', 'Parmeters'] for the two misspelled words
 ```
+
+## Data
