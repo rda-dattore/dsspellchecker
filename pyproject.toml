@@ -18,7 +18,7 @@ classifiers = [
 ]
 
 [project.scripts]
-build_spellchecker_db = "spellchecker.pkg_init:build_db"
+build_spellchecker_db = "spellchecker.db_utils:build_db"
 
 [tool.setuptools.package-data]
 spellchecker = ["data/*.lst", "data/*.db"]
