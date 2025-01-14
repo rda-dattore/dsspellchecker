@@ -24,4 +24,4 @@ add_spellchecker_words = "spellchecker.db_utils:add_words"
 add_spellchecker_acronym = "spellchecker.db_utils:add_acronym"
 
 [tool.setuptools.package-data]
-spellchecker = ["data/*.lst", "data/*.db"]
+spellchecker = ["dictionary/*.lst"]
