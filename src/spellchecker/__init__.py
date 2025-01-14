@@ -44,7 +44,7 @@ class SpellChecker:
         self._misspelled_words = []
         self._error = ""
         try:
-            conn = sqlite3.connect(os.path.join(os.path.dirname(__file__), "data/valids.db"))
+            conn = sqlite3.connect(os.path.join(os.path.dirname(__file__), "dictionary/valids.db"))
             cursor = conn.cursor()
             for key in self._valids:
                 for e in self._valids[key]:

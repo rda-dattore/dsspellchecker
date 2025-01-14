@@ -57,12 +57,12 @@ def build_db():
         raise FileNotFoundError("unable to locate site-packages directory")
 
     try:
-        data_dir = os.path.join(pkg_dirs[0], "spellchecker/data")
-        conn = sqlite3.connect(os.path.join(data_dir, "valids.db"))
+        dict_dir = os.path.join(pkg_dirs[0], "spellchecker/dictionary")
+        conn = sqlite3.connect(os.path.join(dict_dir, "valids.db"))
         cursor = conn.cursor()
         for e in db_config:
             cursor.execute("create table if not exists " + e + " (" + ", ".join("{} text nocollate nocase".format(t) for t in db_config[e]['columns']) + ", primary key (" + db_config[e]['primary_key'] + "))")
-            with open(os.path.join(data_dir, e + ".lst")) as f:
+            with open(os.path.join(dict_dir, e + ".lst")) as f:
                 lines = f.readlines()
 
             for line in lines:
@@ -120,8 +120,8 @@ def add_words():
         raise RuntimeError("no words were specified")
 
     try:
-        data_dir = os.path.join(pkg_dirs[0], "spellchecker/data")
-        conn = sqlite3.connect(os.path.join(data_dir, "valids.db"))
+        dict_dir = os.path.join(pkg_dirs[0], "spellchecker/dictionary")
+        conn = sqlite3.connect(os.path.join(dict_dir, "valids.db"))
         cursor = conn.cursor()
         for x in range(0, len(words)):
             if db_config[table]['icase']:
@@ -171,8 +171,8 @@ def add_acronym():
         raise UnboundLocalError("full name for the acronym not specified")
 
     try:
-        data_dir = os.path.join(pkg_dirs[0], "spellchecker/data")
-        conn = sqlite3.connect(os.path.join(data_dir, "valids.db"))
+        dict_dir = os.path.join(pkg_dirs[0], "spellchecker/dictionary")
+        conn = sqlite3.connect(os.path.join(dict_dir, "valids.db"))
         cursor = conn.cursor()
         cursor.execute("insert into acronyms values (?, ?)", (acronym.upper(), full_name))
         conn.commit()
