@@ -13,8 +13,8 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install spellch
 Follow these steps:
 1. Download the wheel (.whl) file from the dist directory
 1. From within your python environment:
-   a. run `pip install <name_of_wheel_file>`
-   a. build the spellchecker database from the command line with the utility `build_spellchecker_db`
+   - run `pip install <name_of_wheel_file>`
+   - build the spellchecker database from the command line with the utility `build_spellchecker_db`
 
 ## Usage
 
