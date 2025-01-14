@@ -2,6 +2,8 @@
 
 This spellchecker validates the words in a text string and returns a list of words that fail to validate.
 
+This spellchecker was developed mainly for the purpose of validating the text fields of the dataset metadata for the NSF NCAR Research Data Archive. This means that the dictionary will be mainly geoscience and dataset-focused, and you won't find many general English words like 'beautiful', for example. There is a way to add words to the dictionary, but be aware that if you want to use it for more general use, it will likely require numerous additions.
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
