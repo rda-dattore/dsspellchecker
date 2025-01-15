@@ -205,6 +205,15 @@ def clean_word(word):
     if len(word) == 0:
         return ""
 
+    # strip html entities
+    entity = re.compile("&\S{1,};")
+    m = entity.findall(word)
+    for e in m:
+        word = word.replace(e, "")
+
+    if len(word) == 0:
+        return ""
+
     word = trim_punctuation(word)
     if len(word) == 0:
         return ""
