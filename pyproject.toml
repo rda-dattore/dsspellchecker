@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "spellchecker"
+name = "dsspellchecker"
 version = "0.1.0"
 authors = [
     {name = "Bob Dattore", email = "dattore@ucar.edu"},
@@ -24,4 +24,4 @@ add_spellchecker_words = "spellchecker.db_utils:add_words"
 add_spellchecker_acronym = "spellchecker.db_utils:add_acronym"
 
 [tool.setuptools.package-data]
-spellchecker = ["dictionary/*.lst"]
+spellchecker = ["dictionary/*.lst", "dictionary/valids.db"]
