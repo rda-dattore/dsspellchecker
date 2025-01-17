@@ -55,6 +55,8 @@ CERA | Coupled ECMWF Re-Analysis
 CERA-20C | 20th Century Coupled ECMWF Re-Analysis
 CERSAT | Centre ERS d'Archivage et de Traitement
 CESM | NCAR Community Earth System Model
+CESM-HR | NCAR Community Earth System Model High ocean Resolution
+CESM-LR | NCAR Community Earth System Model Low ocean Resolution
 CESM1.2 | NCAR Community Earth System Model version 1.2
 CFDDA | NCAR's Climate Four Dimensional Data Assimilation
 CFS | Climate Forecast System
@@ -135,6 +137,7 @@ ERS-1 | European Remote-Sensing Satellite-1
 ERS-2 | European Remote-Sensing Satellite-2
 ERSLP | Extended Reconstructed Sea Level Pressure
 ERSST | Extended Reconstructed Sea Surface Temperature
+ERSSTv3b | Extended Reconstructed Sea Surface Temperature version 3b
 ERSSTv5 | Extended Reconstructed Sea Surface Temperature version 5
 ESA | European Space Agency
 ESMR | Electronically Scanned Microwave Radiometer
