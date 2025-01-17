@@ -12,7 +12,7 @@ class SpellChecker:
         self._general_valids = []
         self._acronym_valids = []
         self._exact_match_valids = []
-        self._units_valids = []
+        self._unit_abbrevs_valids = []
         self._file_ext_valids = []
         self._valids = {
             'general': [
@@ -34,8 +34,8 @@ class SpellChecker:
             'exact_others': [
                 {'column': "word", 'set': self._exact_match_valids},
             ],
-            'units': [
-                {'column': "word", 'set': self._units_valids},
+            'unit_abbrevs': [
+                {'column': "word", 'set': self._unit_abbrevs_valids},
             ],
             'file_exts': [
                 {'column': "word", 'set': self._file_ext_valids},
@@ -60,7 +60,7 @@ class SpellChecker:
         del self._general_valids
         del self._acronym_valids
         del self._exact_match_valids
-        del self._units_valids
+        del self._unit_abbrevs_valids
         del self._file_ext_valids
 
 
@@ -144,8 +144,8 @@ class SpellChecker:
             check_text = check_text.replace("\n", " ")
             check_text = trim(check_text)
             check_text = self.new_text(check_text, includePrevious=True)
-            # check text directly against the units valids
-            self._misspelled_words = unknown(check_text, self._units_valids, units=True)
+            # check text directly against the unit abbreviations valids
+            self._misspelled_words = unknown(check_text, self._unit_abbrevs_valids, units=True)
 
         if len(self._misspelled_words) > 0:
             check_text = self.new_text(check_text)

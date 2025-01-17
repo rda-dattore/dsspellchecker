@@ -12,7 +12,7 @@ db_config = {
         'primary_key': "word",
         'icase': True,
     },
-    'units': {
+    'unit_abbrevs': {
         'columns': ["word"],
         'primary_key': "word",
         'icase': False,
