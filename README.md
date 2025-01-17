@@ -13,8 +13,8 @@ The project was developed mainly for the purpose of validating the text fields o
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install spellchecker.
 
 From within your python environment:
-   - run `pip install git+https://github.com/rda-dattore/dsspellchecker`
-   - build the spellchecker database from the command line with the utility `build_spellchecker_db`
+1. run `pip install git+https://github.com/rda-dattore/dsspellchecker`
+1. build the spellchecker database from the command line with the utility `build_spellchecker_db`
 
 ## Usage
 
