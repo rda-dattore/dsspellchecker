@@ -127,9 +127,17 @@ class SpellChecker:
 
         if len(self._misspelled_words) > 0:
             check_text = self.new_text(check_text)
-            if text.find("/") >= 0:
-                # check compound (slash) words in the text directly against the acronyms
-                self._misspelled_words = unknown(check_text, self._acronym_valids, separator="/")
+            separator = ""
+            if text.find("/") > 0:
+                separator = "/"
+
+            if len(separator) == 0:
+                if text.find("-") > 0:
+                    separator = "-"
+
+            if len(separator) > 0:
+                # check compound words in the text directly against the acronyms
+                self._misspelled_words = unknown(check_text, self._acronym_valids, separator=separator)
 
         if len(self._misspelled_words) > 0:
             check_text = text
