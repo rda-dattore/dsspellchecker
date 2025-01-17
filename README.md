@@ -12,10 +12,8 @@ The project was developed mainly for the purpose of validating the text fields o
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install spellchecker.
 
-Follow these steps:
-1. Download the wheel (.whl) file from the dist directory
-1. From within your python environment:
-   - run `pip install <name_of_wheel_file>`
+From within your python environment:
+   - run `pip install git+https://github.com/rda-dattore/dsspellchecker`
    - build the spellchecker database from the command line with the utility `build_spellchecker_db`
 
 ## Usage
