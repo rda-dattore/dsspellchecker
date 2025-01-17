@@ -24,7 +24,6 @@ CD-ROM
 cell/pixel-registration
 Celsius
 Centre
-CESM-HR
 (CMIP)-class
 CMIP-class
 CMORization
@@ -52,15 +51,12 @@ ecmf
 e.g.
 egrr
 EOLE
-ERSSTv3b
 facto
 Fahrenheit
 Fluxnet
-GARD-LENS
 GCM/Mixed-layer
 Geo
 GEOS-Chem
-GOCART-AFWA
 GPM_3IMERGDF
 GPM_3IMERGHH
 grid/node-registration
@@ -105,7 +101,6 @@ LITTLE_R
 macro-perturbation
 macro-perturbations
 MAM4-VBS
-MERRA-2
 meso-beta
 MeteoFrance
 Meteor.
