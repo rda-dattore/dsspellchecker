@@ -56,9 +56,15 @@ def build_db():
     if len(pkg_dirs) == 0:
         raise FileNotFoundError("unable to locate site-packages directory")
 
+    dict_dir = os.path.join(pkg_dirs[0], "spellchecker/dictionary")
+    db_name = os.path.join(dict_dir, "valids.db")
     try:
-        dict_dir = os.path.join(pkg_dirs[0], "spellchecker/dictionary")
-        conn = sqlite3.connect(os.path.join(dict_dir, "valids.db"))
+        os.remove(db_name)
+    except FileNotFoundError:
+        pass
+
+    try:
+        conn = sqlite3.connect(db_name)
         cursor = conn.cursor()
         for e in db_config:
             cursor.execute("create table if not exists " + e + " (" + ", ".join("{} text nocollate nocase".format(t) for t in db_config[e]['columns']) + ", primary key (" + db_config[e]['primary_key'] + "))")
