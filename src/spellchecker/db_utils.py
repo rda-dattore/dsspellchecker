@@ -51,7 +51,10 @@ db_config = {
 }
 
 
-def build_db():
+def build_db(args):
+    if args[0] == "-h":
+        sys.exit(1)
+
     print("Building database from lists of valids ...")
     pkg_dirs = site.getsitepackages()
     if len(pkg_dirs) == 0:
@@ -87,17 +90,23 @@ def build_db():
 
 
 #def add_words(words, table, **kwargs):
-def add_words():
+def add_words(args):
+    util_name = args[-1]
+    del args[-1]
     try:
-        if len(sys.argv[1:]) == 0:
+        if len(args) == 0:
+            raise getopt.GetoptError("missing input")
+
+        if args[0] == "-h":
             raise getopt.GetoptError("")
 
-        opts, args = getopt.getopt(sys.argv[1:], "t:w:")
+        opts, args = getopt.getopt(args, "t:w:")
     except getopt.GetoptError as err:
+        func_name = inspect.currentframe().f_code.co_name
         if len(str(err)) > 0:
             print("Error: {}\n".format(err))
 
-        print("usage: {} -t <table> -w <words> ...".format(sys.argv[0][sys.argv[0].rfind("/")+1:]))
+        print("usage: {} {} -t <table> -w <words> ...".format(util_name, func_name))
         print("\nrequired:")
         print("    -t <table>   name of table where word(s) will be inserted")
         print("    -w <words>   words to insert")
@@ -145,17 +154,23 @@ def add_words():
     conn.close()
 
 
-def add_acronym():
+def add_acronym(args):
+    util_name = args[-1]
+    del args[-1]
     try:
-        if len(sys.argv[1:]) == 0:
+        if len(args) == 0:
+            raise getopt.GetoptError("missing input")
+
+        if args[0] == "-h":
             raise getopt.GetoptError("")
 
-        opts, args = getopt.getopt(sys.argv[1:], "a:d:")
+        opts, args = getopt.getopt(args, "a:d:")
     except getopt.GetoptError as err:
+        func_name = inspect.currentframe().f_code.co_name
         if len(str(err)) > 0:
             print("Error: {}\n".format(err))
 
-        print("usage: {} -a <acronym> -d <description>".format(sys.argv[0][sys.argv[0].rfind("/")+1:]))
+        print("usage: {} {} -a <acronym> -d <description>".format(util_name, func_name))
         print("\nrequired:")
         print("    -a <acronym>     the acronym to add")
         print("    -f <full_name>   the full name of the acronym")
@@ -191,18 +206,36 @@ def add_acronym():
     conn.close()
 
 
-def dump_db():
+def dump_db(args):
+    if args[0] == "-h":
+        sys.exit(1)
+
     pass
 
 
 def spellchecker_manage():
-    args = sys.argv[1:]
+    util_name = inspect.currentframe().f_code.co_name
+    args = sys.argv[1:] + [util_name]
     if len(args) < 1:
-        print("usage: {} <action>".format(inspect.currentframe().f_code.co_name))
-        print("\naction:")
-        print("    build_db    build the spellchecker database")
+        print("usage: {} <command> [args...]".format(func_name))
+        print("\ncommand:")
+        print("    add_words     add words to the spellchecker database")
+        print("    add_acronym   add an acronym to the spellchecker database")
+        print("    build_db      build the spellchecker database")
+        print("    dump_db       dump the spellchecker database")
+        print("\nuse `{} <command> -h` to get help for the specific\n     command".format(func_name))
+        sys.exit(1)
 
-    print("args = " + str(sys.argv[1:]))
+    if args[0] == "build_db":
+        build_db(args[1:])
+    elif args[0] == "add_words":
+        add_words(args[1:])
+    elif args[0] == "add_acronym":
+        add_acronym(args[1:])
+    elif args[0] == "dump_db":
+        dump_db(args[1:])
+    else:
+        raise ValueError("invalid command")
 
 
 if __name__ == "__main__":
