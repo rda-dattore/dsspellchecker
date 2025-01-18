@@ -1,4 +1,5 @@
 import getopt
+import inspect
 import os
 import shutil
 import site
@@ -192,3 +193,17 @@ def add_acronym():
 
 def dump_db():
     pass
+
+
+def spellchecker_manage():
+    args = sys.argv[1:]
+    if len(args) < 1:
+        print("usage: {} <action>".format(inspect.currentframe().f_code.co_name))
+        print("\naction:")
+        print("    build_db    build the spellchecker database")
+
+    print("args = " + str(sys.argv[1:]))
+
+
+if __name__ == "__main__":
+    spellchecker_manage()
