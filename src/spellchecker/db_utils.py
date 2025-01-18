@@ -230,12 +230,12 @@ def dump_db(args):
         ))
         sys.exit(1)
 
-    dir = opts[0][1] if 'opts' in locals() else ""
     pkg_dirs = site.getsitepackages()
     if len(pkg_dirs) == 0:
         raise FileNotFoundError("unable to locate site-packages directory")
 
     dict_dir = os.path.join(pkg_dirs[0], "spellchecker/dictionary")
+    dump_dir = opts[0][1] if 'opts' in locals() else dict_dir
     db_name = os.path.join(dict_dir, "valids.db")
     conn = sqlite3.connect(os.path.join(dict_dir, "valids.db"))
     cursor = conn.cursor()
@@ -245,12 +245,12 @@ def dump_db(args):
         if len(res) == 0:
             raise sqlite3.Error("table '{}' is empty".format(e))
 
-        if not os.path.exists(dir):
-            os.makedirs(dir)
+        if not os.path.exists(dump_dir):
+            os.makedirs(dump_dir)
 
         fname = e + ".lst"
         print("Writing  {} entries to '{}' ...".format(str(len(res)), fname))
-        with open(os.path.join(dir, fname), "w") as f:
+        with open(os.path.join(dump_dir, fname), "w") as f:
             for l in res:
                 f.write(" | ".join(x for x in l) + "\n")
 
