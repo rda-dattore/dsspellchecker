@@ -18,10 +18,7 @@ classifiers = [
 ]
 
 [project.scripts]
-build_spellchecker_db = "spellchecker.db_utils:build_db"
-dump_spellchecker_db = "spellchecker.db_utils:dump_db"
-add_spellchecker_words = "spellchecker.db_utils:add_words"
-add_spellchecker_acronym = "spellchecker.db_utils:add_acronym"
+spellchecker_manage = "spellchecker.db_utils:spellchecker_manage"
 
 [tool.setuptools.package-data]
 spellchecker = ["dictionary/*.lst", "dictionary/valids.db"]
