@@ -53,7 +53,14 @@ db_config = {
 
 def build_db(args):
     if args[0] == "-h":
-        print("This command builds the spellchecker database from the word lists.")
+        func_name = inspect.currentframe().f_code.co_name
+        print((
+            "usage: {} {}".format(args[-1], func_name) + "\n"
+            "\n"
+            "This command builds the spellchecker database from the word lists. It doesn't\n"
+            "take any arguments. Use this command after installing the spellchecker to\n"
+            "initialize the database.\n"
+        ))
         sys.exit(1)
 
     print("Building database from lists of valids ...")
@@ -104,7 +111,8 @@ def add_words(args):
 
         print((
             "usage: {} {} -t <table> -w <words> ...".format(util_name, func_name) + "\n"
-            "\nrequired:\n"
+            "\n"
+            "required:\n"
             "    -t <table>   name of table where word(s) will be inserted\n"
             "    -w <words>   words to insert\n"
             "                   can be a string - e.g. -w \"word1 word2 word3\"\n"
@@ -170,7 +178,8 @@ def add_acronym(args):
 
         print((
             "usage: {} {} -a <acronym> -d <description>".format(util_name, func_name) + "\n"
-            "\nrequired:\n"
+            "\n"
+            "required:\n"
             "    -a <acronym>     the acronym to add\n"
             "    -f <full_name>   the full name of the acronym\n"
         ))
@@ -219,12 +228,14 @@ def spellchecker_manage():
     if len(args) < 2:
         print((
             "usage: {} <command> [args...]".format(util_name) + "\n"
-            "\ncommand:\n"
+            "\n"
+            "command:\n"
             "    add_words     add words to the spellchecker database\n"
             "    add_acronym   add an acronym to the spellchecker database\n"
             "    build_db      build the spellchecker database\n"
             "    dump_db       dump the spellchecker database\n"
-            "\nuse `{} <command> -h` to get help for the specific\n     command".format(util_name) + "\n"
+            "\n"
+            "use `{} <command> -h` to get help for the specific command".format(util_name) + "\n"
         ))
         sys.exit(1)
 
