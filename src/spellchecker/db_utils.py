@@ -53,6 +53,7 @@ db_config = {
 
 def build_db(args):
     if args[0] == "-h":
+        print("This command builds the spellchecker database from the word lists.")
         sys.exit(1)
 
     print("Building database from lists of valids ...")
@@ -101,12 +102,14 @@ def add_words(args):
         if len(str(err)) > 0:
             print("Error: {}\n".format(err))
 
-        print("usage: {} {} -t <table> -w <words> ...".format(util_name, func_name))
-        print("\nrequired:")
-        print("    -t <table>   name of table where word(s) will be inserted")
-        print("    -w <words>   words to insert")
-        print("                   can be a string - e.g. -w \"word1 word2 word3\"")
-        print("                   can be repeated - e.g. -w word1 -w word2")
+        print((
+            "usage: {} {} -t <table> -w <words> ...".format(util_name, func_name) + "\n"
+            "\nrequired:\n"
+            "    -t <table>   name of table where word(s) will be inserted\n"
+            "    -w <words>   words to insert\n"
+            "                   can be a string - e.g. -w \"word1 word2 word3\"\n"
+            "                   can be repeated - e.g. -w word1 -w word2\n"
+        ))
         sys.exit(1)
 
     pkg_dirs = site.getsitepackages()
@@ -165,10 +168,12 @@ def add_acronym(args):
         if len(str(err)) > 0:
             print("Error: {}\n".format(err))
 
-        print("usage: {} {} -a <acronym> -d <description>".format(util_name, func_name))
-        print("\nrequired:")
-        print("    -a <acronym>     the acronym to add")
-        print("    -f <full_name>   the full name of the acronym")
+        print((
+            "usage: {} {} -a <acronym> -d <description>".format(util_name, func_name) + "\n"
+            "\nrequired:\n"
+            "    -a <acronym>     the acronym to add\n"
+            "    -f <full_name>   the full name of the acronym\n"
+        ))
         sys.exit(1)
 
     pkg_dirs = site.getsitepackages()
@@ -212,13 +217,15 @@ def spellchecker_manage():
     util_name = inspect.currentframe().f_code.co_name
     args = sys.argv[1:] + [util_name]
     if len(args) < 2:
-        print("usage: {} <command> [args...]".format(util_name))
-        print("\ncommand:")
-        print("    add_words     add words to the spellchecker database")
-        print("    add_acronym   add an acronym to the spellchecker database")
-        print("    build_db      build the spellchecker database")
-        print("    dump_db       dump the spellchecker database")
-        print("\nuse `{} <command> -h` to get help for the specific\n     command".format(util_name))
+        print((
+            "usage: {} <command> [args...]".format(util_name) + "\n"
+            "\ncommand:\n"
+            "    add_words     add words to the spellchecker database\n"
+            "    add_acronym   add an acronym to the spellchecker database\n"
+            "    build_db      build the spellchecker database\n"
+            "    dump_db       dump the spellchecker database\n"
+            "\nuse `{} <command> -h` to get help for the specific\n     command".format(util_name) + "\n"
+        ))
         sys.exit(1)
 
     if args[0] == "build_db":
