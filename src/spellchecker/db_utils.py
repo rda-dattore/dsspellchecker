@@ -63,11 +63,6 @@ def build_db(args):
     dict_dir = os.path.join(pkg_dirs[0], "spellchecker/dictionary")
     db_name = os.path.join(dict_dir, "valids.db")
     try:
-        os.remove(db_name)
-    except FileNotFoundError:
-        pass
-
-    try:
         conn = sqlite3.connect(db_name)
         cursor = conn.cursor()
         for e in db_config:
