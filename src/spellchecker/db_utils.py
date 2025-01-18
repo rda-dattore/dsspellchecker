@@ -211,14 +211,14 @@ def dump_db(args):
 def spellchecker_manage():
     util_name = inspect.currentframe().f_code.co_name
     args = sys.argv[1:] + [util_name]
-    if len(args) < 1:
-        print("usage: {} <command> [args...]".format(func_name))
+    if len(args) < 2:
+        print("usage: {} <command> [args...]".format(util_name))
         print("\ncommand:")
         print("    add_words     add words to the spellchecker database")
         print("    add_acronym   add an acronym to the spellchecker database")
         print("    build_db      build the spellchecker database")
         print("    dump_db       dump the spellchecker database")
-        print("\nuse `{} <command> -h` to get help for the specific\n     command".format(func_name))
+        print("\nuse `{} <command> -h` to get help for the specific\n     command".format(util_name))
         sys.exit(1)
 
     if args[0] == "build_db":
