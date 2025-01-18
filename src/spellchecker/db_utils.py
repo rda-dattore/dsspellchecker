@@ -70,25 +70,21 @@ def build_db(args):
 
     dict_dir = os.path.join(pkg_dirs[0], "spellchecker/dictionary")
     db_name = os.path.join(dict_dir, "valids.db")
-    try:
-        conn = sqlite3.connect(db_name)
-        cursor = conn.cursor()
-        for e in db_config:
-            cursor.execute("create table if not exists " + e + " (" + ", ".join("{} text nocollate nocase".format(t) for t in db_config[e]['columns']) + ", primary key (" + db_config[e]['primary_key'] + "))")
-            with open(os.path.join(dict_dir, e + ".lst")) as f:
-                lines = f.readlines()
+    conn = sqlite3.connect(db_name)
+    cursor = conn.cursor()
+    for e in db_config:
+        cursor.execute("create table if not exists " + e + " (" + ", ".join("{} text nocollate nocase".format(t) for t in db_config[e]['columns']) + ", primary key (" + db_config[e]['primary_key'] + "))")
+        with open(os.path.join(dict_dir, e + ".lst")) as f:
+            lines = f.readlines()
 
-            for line in lines:
-                words = line.split("|")
-                cursor.execute("insert into " + e + " (" + ", ".join(db_config[e]['columns']) + ") values (" + ", ".join("?" for word in words) + ") on conflict do nothing", tuple(word.strip() for word in words))
-                conn.commit()
+        for line in lines:
+            words = line.split("|")
+            cursor.execute("insert into " + e + " (" + ", ".join(db_config[e]['columns']) + ") values (" + ", ".join("?" for word in words) + ") on conflict do nothing", tuple(word.strip() for word in words))
+            conn.commit()
 
-            f.close()
+        f.close()
 
-        conn.close()
-    except Exception as err:
-        raise RuntimeError(err)
-
+    conn.close()
     print("... done.")
 
 
@@ -216,10 +212,52 @@ def add_acronym(args):
 
 
 def dump_db(args):
-    if args[0] == "-h":
+    util_name = args[-1]
+    del args[-1]
+    try:
+        if len(args) > 0:
+            if args[0] == "-h":
+                raise getopt.GetoptError("")
+
+            opts, args = getopt.getopt(args, "", ["dir="])
+    except getopt.GetoptError as err:
+        func_name = inspect.currentframe().f_code.co_name
+        if len(str(err)) > 0:
+            print("Error: {}\n".format(err))
+
+        print((
+            "usage: {} {} [--dir=<path>]".format(util_name, func_name) + "\n"
+        ))
         sys.exit(1)
 
-    pass
+    dir = opts[0][1] if 'opts' in locals() else ""
+    pkg_dirs = site.getsitepackages()
+    if len(pkg_dirs) == 0:
+        raise FileNotFoundError("unable to locate site-packages directory")
+
+    dict_dir = os.path.join(pkg_dirs[0], "spellchecker/dictionary")
+    db_name = os.path.join(dict_dir, "valids.db")
+    conn = sqlite3.connect(os.path.join(dict_dir, "valids.db"))
+    cursor = conn.cursor()
+    for e in db_config:
+        cursor.execute("select " + ", ".join(db_config[e]['columns']) + " from " + e)
+        res = cursor.fetchall()
+        if len(res) == 0:
+            raise sqlite3.Error("table '{}' is empty".format(e))
+
+        if not os.path.exists(dir):
+            os.makedirs(dir)
+
+        fname = e + ".lst"
+        print("Writing  {} entries to '{}' ...".format(str(len(res)), fname))
+        with open(os.path.join(dir, fname), "w") as f:
+            for l in res:
+                f.write(" | ".join(x for x in l) + "\n")
+
+        f.close()
+
+    conn.close()
+    print("... done.")
 
 
 def spellchecker_manage():
