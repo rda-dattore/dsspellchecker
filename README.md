@@ -41,4 +41,22 @@ print(spell_checker.misspelled_words)
 # prints ['datset', 'Parmeters'] for the two misspelled words
 ```
 
-## Data
+## Dictionary
+
+The dictionary is divided up into several word lists. Some of this is functional (affects the way the spellchecker does validation) and some of this is simply organizational (grouping of like words). The various lists and their functions follow:
+
+### general.lst
+
+### acronyms.lst
+
+### names.lst
+
+### places.lst
+
+### exact_others.lst
+
+### unit_abbrevs.lst
+
+### file_exts.lst
+
+### non_english.lst
