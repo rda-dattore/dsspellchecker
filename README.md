@@ -45,18 +45,18 @@ print(spell_checker.misspelled_words)
 
 The dictionary is divided up into several word lists. Some of this is functional (affects the way the spellchecker does validation) and some of this is simply organizational (grouping of like words). The various lists and their functions follow:
 
-### general.lst
+#### general.lst
 
-### acronyms.lst
+#### acronyms.lst
 
-### names.lst
+#### names.lst
 
-### places.lst
+#### places.lst
 
-### exact_others.lst
+#### exact_others.lst
 
-### unit_abbrevs.lst
+#### unit_abbrevs.lst
 
-### file_exts.lst
+#### file_exts.lst
 
-### non_english.lst
+#### non_english.lst
