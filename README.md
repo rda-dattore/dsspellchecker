@@ -45,7 +45,7 @@ print(spell_checker.misspelled_words)
 
 The dictionary is divided up into several word lists. Some of this is functional (affects the way the spellchecker does validation) and some of this is simply organizational (grouping of like words). The various lists and their functions follow:
 
-##### general.lst
+**general.lst:** this is the list of "everyday" words and the spellchecker will validate words case-insensitively against these entries (e.g. 'world', 'World', and 'wORld' will all validate as being spelled correctly)
 
 ##### acronyms.lst
 
