@@ -2,7 +2,7 @@ import os
 import site
 import sqlite3
 
-from libpkg import strip_plural, strip_punctuation
+from libpkg.strutils import strip_plural, strip_punctuation
 
 from .utils import clean_word, unknown
 
