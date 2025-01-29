@@ -2,9 +2,9 @@ import os
 import site
 import sqlite3
 
+from libpkg import strip_plural, strip_punctuation
 
 from .utils import clean_word, unknown
-from .trim import trim, trim_plural, trim_punctuation
 
 
 class SpellChecker:
@@ -90,8 +90,7 @@ class SpellChecker:
 
     def check(self, text):
         check_text = text
-        check_text = check_text.replace("\n", " ").replace("\u2010", "-")
-        check_text = trim(check_text)
+        check_text = check_text.replace("\n", " ").replace("\u2010", "-").strip()
 
         # check the text case-insensitive against the general words
         self._misspelled_words = unknown(check_text, self._general_valids, icase=True, file_ext_valids=self._file_ext_valids)
@@ -141,8 +140,7 @@ class SpellChecker:
 
         if len(self._misspelled_words) > 0:
             check_text = text
-            check_text = check_text.replace("\n", " ")
-            check_text = trim(check_text)
+            check_text = check_text.replace("\n", " ").strip()
             check_text = self.new_text(check_text, includePrevious=True)
             # check text directly against the unit abbreviations valids
             self._misspelled_words = unknown(check_text, self._unit_abbrevs_valids, units=True)
@@ -156,7 +154,7 @@ class SpellChecker:
         # ignore 'unknown' acronyms
         if len(self._misspelled_words) > 0:
             for x in range(0, len(self._misspelled_words)):
-                word = trim_plural(self._misspelled_words[x].replace(".", ""))
+                word = strip_plural(self._misspelled_words[x].replace(".", ""))
                 if word.isalnum() and word == word.upper():
                     self._misspelled_words[x] = ""
 
@@ -177,7 +175,11 @@ class SpellChecker:
                 if midx == len(self._misspelled_words):
                     break
 
-                if self._misspelled_words[midx] in (words[n], clean_word(words[n]), trim_punctuation(words[n]), trim(words[n])):
+                stripped, pword = strip_punctuation(words[n])
+                while stripped:
+                    stripped, pword = strip_punctuation(pword)
+
+                if self._misspelled_words[midx] in (words[n], clean_word(words[n]), pword, words[n].strip()):
                     text += " " + words[n-1] + " " + self._misspelled_words[midx]
                     midx += 1
 
