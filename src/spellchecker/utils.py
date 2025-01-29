@@ -1,8 +1,7 @@
 import re
 import string
 
-
-from libpkg import strip_plural, strip_punctuation
+from libpkg.strutils import strip_plural, strip_punctuation
 
 
 def unknown(text, valids, **kwargs):
