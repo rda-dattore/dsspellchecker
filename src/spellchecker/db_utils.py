@@ -70,6 +70,9 @@ def build_db(args):
 
     dict_dir = os.path.join(pkg_dirs[0], "spellchecker/dictionary")
     db_name = os.path.join(dict_dir, "valids.db")
+    if os.path.exists(db_name):
+        os.unlink(db_name)
+
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
     for e in db_config:
