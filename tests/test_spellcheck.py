@@ -17,6 +17,8 @@ class TestSpellCheck(unittest.TestCase):
         self.assertEqual(sc.misspelled_words, [])
         sc.check("Hello, wrold!")
         self.assertEqual(sc.misspelled_words, ["wrold"])
+        sc.check("This is a test, (and I hope it passes)!")
+        self.assertEqual(sc.misspelled_words, [])
 
 
     def test_place(self):
