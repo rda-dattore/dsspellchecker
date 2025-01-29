@@ -2,7 +2,7 @@ import re
 import string
 
 
-from .trim import trim_front, trim_plural, trim_punctuation
+from libpkg import strip_plural, strip_punctuation
 
 
 def unknown(text, valids, **kwargs):
@@ -18,7 +18,7 @@ def unknown(text, valids, **kwargs):
         if words[n] not in misspelled_words:
             cword = words[n]
             if 'trimPlural' in kwargs and kwargs['trimPlural']:
-                cword = trim_plural(cword)
+                cword = strip_plural(cword)
 
             if validate_word(cword, file_ext_valids):
                 if cword[0:4] == "non-":
@@ -30,7 +30,7 @@ def unknown(text, valids, **kwargs):
                 if len(separator) == 0:
                     if checking_units:
                         if cword in valids:
-                            pword = trim_front(words[n-1]) if n > 0 else "XX"
+                            pword = words[n-1].strip() if n > 0 else "XX"
                             if pword == "et" and cword == "al":
                                 pass
                             elif not pword.replace(".", "").isnumeric():
@@ -214,9 +214,12 @@ def clean_word(word):
     if len(word) == 0:
         return ""
 
-    word = trim_punctuation(word)
-    if len(word) == 0:
-        return ""
+    stripped, word = strip_punctuation(word)
+    while stripped:
+        if len(word) == 0:
+            return ""
+
+        stripped, word = strip_punctuation(word)
 
     cleaned_word = False
     if word[0] in ('"', '\''):
