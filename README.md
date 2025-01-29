@@ -60,3 +60,5 @@ The dictionary is divided up into several word lists. Some of this is functional
 **file_exts.lst:**
 
 **non_english.lst:**
+
+## Scripts
